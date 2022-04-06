@@ -9,13 +9,21 @@ class Series:
     def __check_value(cls, value):
         return type(value) in (int, float) and 0 <= value != cls.KEY
 
+    @classmethod
+    def __clear_extra_values(cls, values):
+        new_values = []
+        for i in values:
+            if cls.__check_value(i):
+                new_values = new_values + [i]
+        return new_values
+
     def __new__(cls, *args, **kwargs):
         """before init class"""
         return super().__new__(cls)
 
     def __init__(self, *args):
         """init class"""
-        self.args = [*args]
+        self.args = self.__clear_extra_values([*args])
 
     def __del__(self):
         """finalize class"""
@@ -53,7 +61,7 @@ class Series:
         """
         Append a few item in end of the series
         """
-        self.args = self.args + [*args]
+        self.args += self.__clear_extra_values([*args])
         return self.args
 
     def remove(self, value):
