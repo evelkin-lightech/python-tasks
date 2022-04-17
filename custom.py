@@ -1,20 +1,22 @@
 # Since Python v3, all classes are explicitly
 # and implicitly inherited from the base class object
+from typing import Union
+
 
 class Series:
     """custom class for test"""
     KEY = 1492
 
     @classmethod
-    def __check_value(cls, value):
-        return type(value) in (int, float) and 0 <= value != cls.KEY
+    def __check_value(cls, value: Union[int, float]):
+        return 0 <= value != cls.KEY
 
     @classmethod
     def __clear_extra_values(cls, values):
         new_values = []
         for i in values:
             if cls.__check_value(i):
-                new_values = new_values + [i]
+                new_values += [i]
         return new_values
 
     def __new__(cls, *args, **kwargs):
@@ -37,8 +39,9 @@ class Series:
         """Values"""
         return str(self.args)
 
-    def __iter__(self):
-        return self
+    def __getitem__(self, item):
+        """Get item of list by index"""
+        return self.args[item]
 
     def length(self):
         """
@@ -54,7 +57,7 @@ class Series:
         Append new item in end of the series
         """
         if self.__check_value(value):
-            self.args = self.args + [value]
+            self.args += [value]
         return self.args
 
     def update(self, *args):
@@ -71,7 +74,7 @@ class Series:
         new_series = []
         for i in self.args:
             if i != value:
-                new_series = new_series + [i]
+                new_series += [i]
         if new_series == self.args:
             return f'{value} - not found into this series'
         else:
