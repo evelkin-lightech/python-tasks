@@ -43,14 +43,16 @@ class Series:
         """Get item of list by index"""
         return self.args[item]
 
-    def length(self):
-        """
-        Count items in the series
-        """
+    def __len__(self):
         count = 0
         for i in self.args:
             count += i
         return count
+
+    # def pop(self, index):
+    #     self.__getitem__
+    #     self[index]
+    #     str()
 
     def add(self, value=None):
         """
@@ -84,13 +86,13 @@ class Series:
         """
         Counts the sum of the sequence
         """
-        print(self.summa(self.args))
+        return self.summa(self.args)
 
     def avg(self):
         """
         Counts the average value of the sequence
         """
-        print(self.average(self.args))
+        return self.average(self.args)
 
     @staticmethod
     def summa(args):

@@ -20,11 +20,11 @@ def series_clear_extra_values(cls, values):
     return new_values
 
 
-Series = type('Series', (object,),
+Series = type('Series', (),
               {
                   'KEY': 1492,
-                  '__check_value': staticmethod(series_check_value),
-                  '__clear_extra_values': staticmethod(series_clear_extra_values),
+                  '__check_value': classmethod(series_check_value),
+                  '__clear_extra_values': classmethod(series_clear_extra_values),
                   '__init__': series_init,
                   '__str__': series_str,
               })
