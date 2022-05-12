@@ -1,0 +1,49 @@
+Классы в JavaScript поддерживают наследование с помощью ключевого слова extends.
+
+    class User {
+        name
+
+        constructor(name) {
+            this.name = name
+        }
+
+        getName() {
+            return this.name
+        }
+    }
+
+    class ContentWriter extends User {
+        posts = []
+    }
+
+    const writer = new ContentWriter('Лермонтов')
+
+    writer.name // Лермонтов
+    writer.getName() // Лермонтов
+    writer.posts // []
+Частные поля и методы родительского класса не наследуются дочерними классами.
+
+Для того, чтобы вызвать конструктор родительского класса в дочернем классе,
+следует использовать специальную функцию super(), доступную в конструкторе
+дочернего класса:
+    class Child extends Parent {
+        constructor(value1, value2) {
+            super(value1)
+            this.prop2 = value2
+        }
+    }
+Вызов super() «привязывает» родительский конструктор к экземпляру.
+
+Для того, чтобы получить доступ к родительскому методу внутри дочернего класса,
+следует использовать специальное сокращение super:
+    ...
+    getName() {
+        const name = super.getName()
+        if (name === '') {
+            return 'Имярек'
+        }
+        return name
+    }
+    ...
+Это называется переопределением метода.
+

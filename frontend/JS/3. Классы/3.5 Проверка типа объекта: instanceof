@@ -1,0 +1,7 @@
+Выражение object instanceof Class определяет, является ли объект
+экземпляром указанного класса:
+    const user = new User('Печорин')
+    const obj = {}
+
+    user instanceof User // true
+    obj instanceof User // false
