@@ -1,0 +1,38 @@
+git help <команда>
+    подробная информация о команде
+    например:
+        git help config
+
+git <команда> -h
+    краткая информация о команде
+    например:
+        git config -h
+
+git config user.name 'Name'
+git config user.email email@mail.ru
+    настройка гит-репозитория (имя пользователя и почта)
+
+git config --local user.name 'Name'
+git config --global user.name 'Name'
+git config --system user.name 'Name'
+    настройка конфигурации на разных уровнях
+
+git config --list
+    просмотр конфигурации из всех файлов конфигурации
+
+git config --list --local
+git config --list --global
+git config --list --system
+    просмотр конфигураций из файлов на разных уровнях
+
+cat .git/config
+    просмотр файла конфигурации репозитория
+
+git config --global alias.c 'config --global'
+    создание алиаса для config -> git c вместо git config
+
+git config alias.sayhi '!echo "hello"; echo "from git"'
+    создание алиаса для функций, которые будут выполняться друг за другом
+    (благодаря символу !)
+    например:
+       git config alias.sayhi '!git ...; git ...'
