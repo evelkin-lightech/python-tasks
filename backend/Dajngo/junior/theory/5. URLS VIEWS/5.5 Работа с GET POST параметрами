@@ -1,0 +1,29 @@
+GET параметры
+Одним из мест, где мы используем параметры GET, являются фильтры:
+    /products?price_lte=5000
+Для этого типа URL нам не нужно указывать какое-либо регулярное выражение
+для price_lte (параметр). URL может быть:
+    url(r'^products/$', 'viewname', name='urlname')
+    ...
+    def viewname(request):
+        price_lte = request.GET['price_lte']
+        #Код для фильтрации товаров, цена которых меньше, чем price_lte, т.е. 5000
+
+POST параметры
+В общем случае URL при отправке параметров не содержит ничего, связанного
+с параметрами в URL.
+Например:
+    /register
+Urls.py будет содержать что-то вроде:
+    url(r'^register/$', 'зарегистрироваться', name='urlname')
+    ...
+    def register(request):
+        form = RegisterForm()
+        if request.method == "POST":
+            form = RegisterForm(request.POST) #if no files
+            if form.is_valid():
+                #do something if form is valid
+        context = {
+            'form': form
+        }
+        return render(request, "template.html", context)
