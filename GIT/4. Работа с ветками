@@ -51,6 +51,9 @@ git stash apply <index>
 git stash pop
     применяет последний элемент стэш-списка и удаляет его из этого списка
 
+git stash clear
+    очищает весь стэш-список
+
 git branch -f <branch_name> <commit>
 git checkout -B <branch_name> <commit>
     откат ветки <branch_name> к указанному <commit>

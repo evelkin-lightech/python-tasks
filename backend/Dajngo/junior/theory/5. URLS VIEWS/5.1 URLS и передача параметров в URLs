@@ -3,8 +3,8 @@
 Этот модуль представляет собой чистый код Python и является отображением между
 выражениями пути URL и функциями Python (вашими представлениями).
 
-Когда пользователь запрашивает страницу вашего сайта на Django,
-система следует этому алгоритму, чтобы определить, какой код Python выполнить:
+Когда пользователь запрашивает страницу сайта на Django,
+система следует алгоритму, чтобы определить, какой код Python выполнить:
 1. Django определяет используемый корневой модуль URLconf.
    Обычно это значение параметра ROOT_URLCONF, но если входящий объект
    HttpRequest имеет атрибут urlconf (установленный промежуточным программным
@@ -57,3 +57,21 @@ URLconf не смотрит на метод запроса.
         path('contact/', include('contact.urls')),
         # ... snip ...
     ]
+
+Пример передачи параметров в URL:
+    ...
+    url(r'^users/(?P<user_id>\d+)/$', 'viewname', name='urlname')
+    ...
+
+    and FBV:
+
+    def viewname(request, user_id):
+        user = User.objects.get(id=user_id)
+        #do something with this user
+
+    or CBV:
+
+    class SampleView(TemplateView):
+        def get_context_data(self, **kwargs):
+            user = User.objects.get(id=kwargs['user_id'])
+            #do something with this user

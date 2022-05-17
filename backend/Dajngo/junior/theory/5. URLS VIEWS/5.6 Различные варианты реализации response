@@ -1,0 +1,66 @@
+Django HttpResponse
+Этот класс является частью модуля django.http.
+Он отвечает за формирование ответа, соответствующего запросу и обратно клиенту.
+В отличие от HttpRequest объектов, которые Django создает автоматически,
+ответственность за HttpResponse объекты лежит на разработчике.
+Типичное использование — передать содержимое страницы в виде строки,
+байтовой строки или memoryview в HttpResponse конструктор:
+    from django.http import HttpResponse
+    response = HttpResponse("Here's the text of the web page.")
+    response = HttpResponse("Text only, please.", content_type="text/plain")
+    response = HttpResponse(b'Bytestrings are also accepted.')
+    response = HttpResponse(memoryview(b'Memoryview as well.'))
+
+Djnago HttpResponseRedirect
+Это подкласс HttpResponse в Django, являющийся частью модуля django.http
+который возвращает код состояния HTTP 302, указывающий, что ресурс URL-адреса
+найден, но временно перемещен на другой URL-адрес. Этот класс чаще всего
+используется в качестве возвращаемого объекта из представления Django.
+Обычно перенаправления используются с протоколами HTTP, HTTPS и FTP.
+Перенаправления можно использовать для многих целей, таких как перенаправление
+пользователей во время периода обслуживания, предоставление более одного
+URL-адреса веб-странице в Интернете или для настройки постоянных перенаправлений
+для сохранения уже существующих ссылок и закладок.
+Обязателен первый аргумент конструктора — путь для перенаправления.
+    from django.http import HttpResponseRedirect
+    response = HttpResponseRedirect('/search/')
+
+Django JsonResponse
+Это подкласс HttpResponse, помогающий создать ответ в формате JSON.
+Он наследует большую часть поведения от своего суперкласса с парой отличий:
+- его Content-Type заголовок по умолчанию имеет значение application/json
+- Первый параметр dataдолжен быть dictэкземпляром. Если для safe параметра
+  установлено значение False, это может быть любой сериализуемый JSON-объект.
+- encoder, который по умолчанию равен
+  django.core.serializers.json.DjangoJSONEncoder,
+  будет использоваться для сериализации данных.
+    from django.http import JsonResponse
+    response = JsonResponse({'foo': 'bar'})
+    response = JsonResponse([1, 2, 3], safe=False)
+    response = JsonResponse(data, encoder=MyJSONEncoder)
+
+Django StreamingHttpResponse
+Большинство ответов Django используют HttpResponse.
+На высоком уровне это означает, что тело ответа строится в памяти и отправляется
+HTTP-клиенту одним куском.
+A StreamingHttpResponse строит ответ, тело которого
+отправляется клиенту несколькими частями или «фрагментами».
+Одним из лучших вариантов использования потоковой передачи ответов является
+отправка больших файлов, например большого файла CSV.
+
+Django FileResponse
+FileResponse является подклассом StreamingHttpResponse оптимизированного
+для двоичных файлов. Файл автоматически закрывается. Оно использует
+wsgi.file_wrapper, если он предоставлен сервером wsgi, в противном случае
+он передает файл небольшими порциями. FileResponse принимает любой файлоподобный
+объект с двоичным содержимым. Файл будет закрыт автоматически
+    from django.http import FileResponse
+    response = FileResponse(open('myfile.png', 'rb'))
+
+Django redirect
+В Django есть возможность перенаправлять пользователя на различные URL
+при помощи функции redirect(), возвращая при этом экземпляр класса
+представления HttpResponseRedirect или из него.
+    from django.shortcuts import redirect
+    def redirect_view(request):
+        return redirect('/redirect-success/')
