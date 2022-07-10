@@ -1,0 +1,39 @@
+Дескриптор – атрибут объекта, чьё поведение при доступе переопределяется
+методами __get__, __set__ и __delete__. Если определен хотя бы один из этих
+методов, объект становится дескриптором.
+
+В python существует три варианта доступа к атрибуту.
+Допустим у нас есть атрибут a объекта obj:
+- Получим значение атрибута, some_variable = obj.a
+- Изменим его значение, obj.a = 'new value'
+- Удалим атрибут, del obj.a
+
+Python позволяет перехватить выше упомянутые попытки доступа к атрибуту и
+переопределить связанное с этим доступом поведение. Это реализуется через
+механизм протокола дескрипторов.
+
+Простыми словами - дескриптор это класс, в котором определены следующие
+специальные методы: __get__, __set__, __delete__:
+    class TestDesc:
+        def __set_name__(self, owner, name):
+            self.__name = name
+
+        def __get__(self, instance, owner):
+            return instance.__dict__.[self.__name]
+
+        def __set__(self, instance, value):
+            return self.__value = value
+            instance.__dict__.[self.__name] = value
+
+        def __delete__(self, obj):
+            del self.__value
+
+Далее, в теле класса мы создадим экземпляр класса-дескриптора:
+    class TestClass:
+        test_value = TestDesc()
+
+        def __init__(self, x):
+            self.test_value = x
+
+Существуют дескрипотры 2х видов - data-descriptor и non-data-descriptor. Отличаются
+они тем, что в non-data-descriptor реализован только один метод __get__.
