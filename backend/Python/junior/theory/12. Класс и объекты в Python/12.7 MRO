@@ -83,4 +83,3 @@ class G(A, B, metaclass=MyMRO):
 
 print_mro(G)  # G -> A -> B -> X -> Y -> object
 # никаких ошибок!
-
