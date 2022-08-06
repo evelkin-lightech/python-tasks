@@ -19,13 +19,14 @@ def anon_method(usr):
     print(f'exec {usr.group} method')
 
 
-user = User('admin')
+if __name__ == '__main__':
+    user = User('client')
 
-group_methods = {
-    'admin': admin_method,
-    'manager': manager_method,
-    'client': client_method,
-    'anon': anon_method,
-}
+    group_methods = {
+        'admin': admin_method,
+        'manager': manager_method,
+        'client': client_method,
+        'anon': anon_method,
+    }
 
-group_methods[user.group](user)
+    group_methods[user.group](user)

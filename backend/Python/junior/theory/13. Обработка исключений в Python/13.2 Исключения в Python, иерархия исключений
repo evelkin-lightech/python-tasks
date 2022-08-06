@@ -1,0 +1,86 @@
+В Python выделяют два различных вида ошибок:
+- синтаксические ошибки
+- исключения
+
+Синтаксические ошибки возникают в случае если программа написана с нарушениями
+требований Python к синтаксису и определяются они в процессе парсинга программы
+
+Второй вид ошибок – это исключения. Они возникают в случае если синтаксически
+программа корректна, но в процессе выполнения возникает ошибка
+(деление на ноль и т.п.).
+
+В Python исключения являются определенным типом данных, через который
+пользователь (программист) получает информацию об ошибке. Если в коде программы
+исключение не обрабатывается, то приложение останавливается и в консоли
+печатается подробное описание произошедшей ошибки с указанием места в программе,
+где она произошла и тип этой ошибки.
+
+Существует довольно большое количество встроенных типов исключений в языке
+Python, все они составляют определенную иерархию:
+
+BaseException
++– SystemExit
++– KeyboardInterrupt
++– GeneratorExit
++– Exception
+     +– StopIteration
+     +– StopAsyncIteration
+     +– ArithmeticError
+     |    +– FloatingPointError
+     |    +– OverflowError
+     |    +– ZeroDivisionError
+     +– AssertionError
+     +– AttributeError
+     +– BufferError
+     +– EOFError
+     +– ImportError
+          +– ModuleNotFoundError
+     +– LookupError
+     |    +– IndexError
+     |    +– KeyError
+     +– MemoryError
+     +– NameError
+     |    +– UnboundLocalError
+     +– OSError
+     |    +– BlockingIOError
+     |    +– ChildProcessError
+     |    +– ConnectionError
+     |    |    +– BrokenPipeError
+     |    |    +– ConnectionAbortedError
+     |    |    +– ConnectionRefusedError
+     |    |    +– ConnectionResetError
+     |    +– FileExistsError
+     |    +– FileNotFoundError
+     |    +– InterruptedError
+     |    +– IsADirectoryError
+     |    +– NotADirectoryError
+     |    +– PermissionError
+     |    +– ProcessLookupError
+     |    +– TimeoutError
+     +– ReferenceError
+     +– RuntimeError
+     |    +– NotImplementedError
+     |    +– RecursionError
+     +– SyntaxError
+     |    +– IndentationError
+     |         +– TabError
+     +– SystemError
+     +– TypeError
+     +– ValueError
+     |    +– UnicodeError
+     |         +– UnicodeDecodeError
+     |         +– UnicodeEncodeError
+     |         +– UnicodeTranslateError
+     +– Warning
+          +– DeprecationWarning
+          +– PendingDeprecationWarning
+          +– RuntimeWarning
+          +– SyntaxWarning
+          +– UserWarning
+          +– FutureWarning
+          +– ImportWarning
+          +– UnicodeWarning
+          +– BytesWarning
+          +– ResourceWarning
+
+Все исключения являются подклассом исключения BaseException.
