@@ -123,6 +123,12 @@ on_delete опция.
     ...
     ...ForeignKey(settings.AUTH_USER_MODEL)
 
+или
+
+    from django.contrib.auth.models import User
+    ...
+    ...ForeignKey(User)
+
 
 7. `is_staff` за что отвечает данное поле?
 Это некий флаг, который присутствует у Пользователя. Вообще флаги определяют
